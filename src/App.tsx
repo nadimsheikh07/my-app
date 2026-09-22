@@ -1,24 +1,11 @@
-import { useState } from 'react'
-import './App.css'
+import { Outlet } from 'react-router-dom'
+import WebLayout from './layout'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const up = () => {
-    setCount((count) => count + 1)
-  }
-
-  const down = () => {
-    setCount((count) => count - 1)
-
-  }
-
   return (
-    <>
-      <button onClick={() => up()}>Up</button>
-      <button onClick={() => down()}>Down</button>
-      <h1>{count}</h1>
-    </>
+    <WebLayout>
+      <Outlet />
+    </WebLayout>
   )
 }
 
