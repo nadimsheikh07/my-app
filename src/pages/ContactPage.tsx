@@ -4,7 +4,10 @@ import PageHeading from "../components/PageHeading";
 export function ContactPage() {
     return (
         <div>
-            <PageHeading title="Contact" subHeading="Contact page" />
+            <PageHeading breadcrumbs={[
+                { label: "Home", to: "/" },
+                { label: "Contact" }, // last item — no `to`
+            ]} />
 
             <ContactForm />
         </div>

@@ -3,7 +3,9 @@ import PageHeading from "../components/PageHeading";
 export function HomePage() {
     return (
         <div>
-            <PageHeading title="Home" subHeading="Home page" />
+            <PageHeading breadcrumbs={[
+                { label: "Home" }, // last item — no `to`
+            ]} />
         </div>
     )
 }
