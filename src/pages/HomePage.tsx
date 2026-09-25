@@ -1,3 +1,4 @@
+import HomeCarousel from "../components/carouseles/HomeCarousel";
 import PageHeading from "../components/PageHeading";
 
 export function HomePage() {
@@ -6,6 +7,8 @@ export function HomePage() {
             <PageHeading breadcrumbs={[
                 { label: "Home" }, // last item — no `to`
             ]} />
+
+            <HomeCarousel />
         </div>
     )
 }
