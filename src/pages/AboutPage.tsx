@@ -1,53 +1,79 @@
-import { useEffect, useState } from "react";
+import React, { Component, type ChangeEvent } from "react";
 import PageHeading from "../components/PageHeading";
 
-export function AboutPage() {
-    const [about, setAbout] = useState("");
-    const [debouncedAbout, setDebouncedAbout] = useState("");
+// 1. Define types for Breadcrumb items matching your PageHeading signature
+interface Breadcrumb {
+    label: string;
+    to?: string;
+}
 
-    // 1. Initial Mount & Unmount Cleanup
-    useEffect(() => {
+// 2. Define Props and State interfaces
+interface AboutPageProps { }
+
+interface AboutPageState {
+    about: string;
+}
+
+export class AboutPage extends Component<AboutPageProps, AboutPageState> {
+    // Explicitly type the class instance property for the timer
+    private debounceTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    constructor(props: AboutPageProps) {
+        super(props);
+        this.state = {
+            about: ""
+        };
+    }
+
+    // Initial Mount Lifecycle
+    componentDidMount(): void {
         console.log("Init");
+    }
 
-        // Cleanup function (runs when component unmounts)
-        return () => {
-            console.log("AboutPage Unmounted - Cleaned up subscriptions/logs");
-        };
-    }, []);
-
-    // 2. Debounce Logic: Updates 'debouncedAbout' state after a delay
-    useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebouncedAbout(about);
-        }, 500); // 500ms delay
-
-        // Clears the timeout if the user types again within 500ms
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [about]);
-
-    // 3. Update Log: Fires only when the debounced state changes
-    useEffect(() => {
-        if (debouncedAbout) {
-            console.log("about update (debounced):", debouncedAbout);
+    // Unmount Cleanup Lifecycle
+    componentWillUnmount(): void {
+        console.log("AboutPage Unmounted - Cleaned up subscriptions/logs");
+        if (this.debounceTimeout) {
+            clearTimeout(this.debounceTimeout);
         }
-    }, [debouncedAbout]);
+    }
 
-    return (
-        <div>
-            <PageHeading breadcrumbs={[
-                { label: "Home", to: "/" },
-                { label: "About" },
-            ]} />
+    // Explicitly type the change event argument
+    private handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        const value: string = e.target.value;
 
-            <input
-                type="text"
-                value={about}
-                onChange={(e) => setAbout(e.target.value)}
-            />
+        this.setState({ about: value }, () => {
+            if (this.debounceTimeout) {
+                clearTimeout(this.debounceTimeout);
+            }
 
-            <p>{about}</p>
-        </div>
-    );
+            this.debounceTimeout = setTimeout(() => {
+                if (this.state.about) {
+                    console.log("about update (debounced):", this.state.about);
+                }
+            }, 500);
+        });
+    };
+
+    render(): React.ReactNode {
+        // Explicitly define the array type for breadcrumbs
+        const breadcrumbs: Breadcrumb[] = [
+            { label: "Home", to: "/" },
+            { label: "About" },
+        ];
+
+        return (
+            <div>
+                <PageHeading breadcrumbs={breadcrumbs} />
+
+                <input
+                    type="text"
+                    value={this.state.about}
+                    onChange={this.handleInputChange}
+                />
+
+                <p>{this.state.about}</p>
+            </div>
+        );
+    }
 }
