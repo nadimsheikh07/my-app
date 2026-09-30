@@ -1,8 +1,10 @@
-import React, { createContext, use, type ReactNode } from 'react';
+import { createContext, use, useState, type ReactNode } from 'react';
 
 // 1. Define the interface for the context value
 interface AboutContextType {
     about: string;
+    name: string;
+    SetName: any
 }
 
 // 2. Initialize the context with the type (or null if there is no default value)
@@ -15,9 +17,10 @@ interface AboutProviderProps {
 
 export const AboutProvider = ({ children }: AboutProviderProps) => {
     const about = "Hello My friend";
+    const [name, SetName] = useState("")
 
     return (
-        <AboutContext value={{ about }}>
+        <AboutContext value={{ about, name, SetName }}>
             {children}
         </AboutContext>
     );
