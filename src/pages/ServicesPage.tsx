@@ -1,3 +1,4 @@
+import AboutText from "../components/AboutText";
 import PageHeading from "../components/PageHeading";
 
 export function ServicesPage() {
@@ -7,6 +8,8 @@ export function ServicesPage() {
                 { label: "Home", to: "/" },
                 { label: "Service" }, // last item — no `to`
             ]} />
+
+            <AboutText  />
         </div>
     )
 }
