@@ -57,9 +57,9 @@ export function ThemeProvider({
     };
 
     return (
-        <ThemeContext.Provider value={{ theme, themeName, toggleTheme, setTheme }}>
+        <ThemeContext value={{ theme, themeName, toggleTheme, setTheme }}>
             {children}
-        </ThemeContext.Provider>
+        </ThemeContext>
     );
 }
 

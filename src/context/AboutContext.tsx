@@ -17,9 +17,9 @@ export const AboutProvider = ({ children }: AboutProviderProps) => {
     const about = "Hello My friend";
 
     return (
-        <AboutContext.Provider value={{ about }}>
+        <AboutContext value={{ about }}>
             {children}
-        </AboutContext.Provider>
+        </AboutContext>
     );
 };
 
