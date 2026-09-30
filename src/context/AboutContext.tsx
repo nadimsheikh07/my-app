@@ -1,4 +1,4 @@
-import React, { createContext, useContext, type ReactNode } from 'react';
+import React, { createContext, use, type ReactNode } from 'react';
 
 // 1. Define the interface for the context value
 interface AboutContextType {
@@ -25,7 +25,7 @@ export const AboutProvider = ({ children }: AboutProviderProps) => {
 
 // 4. Create the custom hook with a type guard to handle potential null values safely
 export const useAbout = (): AboutContextType => {
-    const context = useContext(AboutContext);
+    const context = use(AboutContext);
     if (!context) {
         throw new Error('useAbout must be used within an AboutProvider');
     }
