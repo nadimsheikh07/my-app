@@ -19,7 +19,7 @@ export const themes: Record<ThemeName, Theme> = {
     name: "light",
     bootstrap: "light",
     colors: {
-      primary: "#0d6efd",
+      primary: "#4ac20e",
       secondary: "#6c757d",
       success: "#198754",
       danger: "#dc3545",
@@ -29,7 +29,7 @@ export const themes: Record<ThemeName, Theme> = {
     name: "dark",
     bootstrap: "dark",
     colors: {
-      primary: "#3d8bfd",
+      primary: "#4ac20e",
       secondary: "#85888c",
       success: "#26b779",
       danger: "#e35d6a",
