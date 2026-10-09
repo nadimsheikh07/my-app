@@ -1,0 +1,285 @@
+/* ================================================================
+   SHELL
+   ================================================================ */
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+  position: relative;
+}
+
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
+.admin-sidebar {
+  width: 250px;
+  background-color: #1e1e2d;
+  color: #a1a5b7;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.25s ease, transform 0.25s ease;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0;
+  z-index: 1045;
+}
+
+.admin-sidebar-brand {
+  padding: 1.15rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.admin-sidebar-brand a {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-icon {
+  font-size: 1.3rem;
+}
+
+.sidebar-close-btn {
+  background: transparent;
+  border: 0;
+  color: #a1a5b7;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0.25rem 0.4rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+.sidebar-close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.admin-sidebar-nav {
+  padding: 1rem 0;
+  flex: 1;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  color: #a1a5b7;
+  text-decoration: none;
+  font-size: 0.925rem;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.admin-nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+.admin-nav-link.active {
+  color: #fff;
+  background-color: rgba(99, 102, 241, 0.15);
+  border-left-color: #6366f1;
+}
+
+.nav-icon {
+  font-size: 1.05rem;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.admin-sidebar-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 0;
+}
+
+/* ================================================================
+   COLLAPSED (desktop only)
+   ================================================================ */
+@media (min-width: 992px) {
+  .sidebar-collapsed .admin-sidebar {
+    width: 70px;
+  }
+  .sidebar-collapsed .brand-text,
+  .sidebar-collapsed .nav-text {
+    display: none;
+  }
+  .sidebar-collapsed .admin-sidebar-brand {
+    padding-left: 1.35rem;
+    padding-right: 1.35rem;
+  }
+  .sidebar-collapsed .admin-nav-link {
+    padding-left: 1.5rem;
+    justify-content: flex-start;
+  }
+}
+
+/* ================================================================
+   BACKDROP (mobile)
+   ================================================================ */
+.admin-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.mobile-open .admin-backdrop {
+  display: block;
+  opacity: 1;
+}
+
+/* ================================================================
+   MAIN
+   ================================================================ */
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+.admin-header {
+  height: 64px;
+  padding: 0;
+  background-color: #fff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+.admin-header .container-fluid {
+  height: 64px;
+}
+
+.admin-header-title {
+  font-weight: 500;
+}
+
+.sidebar-toggle {
+  font-size: 1.4rem;
+  line-height: 1;
+  text-decoration: none !important;
+  border: 0;
+}
+.sidebar-toggle:focus {
+  box-shadow: none;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+/* ================================================================
+   CONTENT
+   ================================================================ */
+.admin-content {
+  flex: 1;
+  overflow-x: hidden;
+}
+
+/* ================================================================
+   MOBILE / TABLET  (< lg = 992px)
+   ================================================================ */
+@media (max-width: 991.98px) {
+  /* Sidebar becomes a fixed slide-in drawer */
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Drawer open */
+  .mobile-open .admin-sidebar {
+    transform: translateX(0);
+  }
+
+  /* Ignore collapsed class on mobile — drawer always shows full labels */
+  .sidebar-collapsed .admin-sidebar {
+    width: 260px;
+  }
+  .sidebar-collapsed .brand-text,
+  .sidebar-collapsed .nav-text {
+    display: inline;
+  }
+  .sidebar-collapsed .admin-sidebar-brand {
+    padding: 1.15rem 1.5rem;
+  }
+  .sidebar-collapsed .admin-nav-link {
+    padding-left: 1.5rem;
+  }
+}
+
+/* ================================================================
+   SMALL PHONES  (< 576px)
+   ================================================================ */
+@media (max-width: 575.98px) {
+  .admin-header,
+  .admin-header .container-fluid {
+    height: 58px;
+  }
+
+  .sidebar-toggle {
+    font-size: 1.25rem;
+    padding: 0.35rem 0.5rem !important;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .logout-btn {
+    padding: 0.25rem 0.55rem;
+    font-size: 0.95rem;
+  }
+
+  .admin-sidebar {
+    width: 82vw;
+    max-width: 300px;
+  }
+
+  .admin-nav-link {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ================================================================
+   REDUCED MOTION
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .admin-sidebar,
+  .admin-backdrop {
+    transition: none;
+  }
+}
